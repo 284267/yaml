@@ -82,41 +82,6 @@ def logout():
     return redirect(url_for('login'))
 
 if __name__ == '__main__':
-    if os.environ.get("WERKZEUG_RUN_MAIN") == "true":
-        ngrok_path = 'C:\\ngrok\\ngrok.exe'  # 替换为你自己的路径
-        try:
-            # 启动 ngrok 静默
-            subprocess.Popen(
-                [ngrok_path, 'http', '5000'],
-                stdout=subprocess.DEVNULL,
-                stderr=subprocess.DEVNULL
-            )
-            time.sleep(2)
-
-            # 获取公网地址
-            tunnel_info = requests.get('http://127.0.0.1:4040/api/tunnels').json()
-            public_url = tunnel_info['tunnels'][0]['public_url']
-
-            # 生成自定义 is.gd 短链
-            suffix = f"ChatGPT{random.randint(1000, 9999)}"
-            short_url_req = requests.get(
-                f'https://is.gd/create.php?format=simple&url={public_url}&shorturl={suffix}'
-            )
-
-            if "Error" in short_url_req.text:
-                short_url = public_url
-                print("⚠️ 自定义短链失败，已使用原始地址")
-            else:
-                short_url = short_url_req.text
-
-            # 输出并复制
-            pyperclip.copy(short_url)
-            print(f"\n✅ 本地地址：http://127.0.0.1:5000")
-            print(f"🌍 公网地址：{public_url}")
-            print(f"🔗 自定义短链：https://is.gd/{suffix}")
-            print("📋 短链已复制到剪贴板，直接 Ctrl+V 粘贴发人就行啦！\n")
-
-        except Exception as e:
-            print("❌ 启动 ngrok 或生成短链失败：", e)
-
     app.run(host='0.0.0.0', port=5000, debug=True)
+
+
