@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <title>管理员后台</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        :root {
+            --google-blue: #4285f4;
+            --google-red: #ea4335;
+            --google-yellow: #fbbc05;
+            --google-green: #34a853;
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .admin-container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 600px;
+            box-sizing: border-box;
+            border-top: 6px solid var(--google-blue);
+        }
+        .title-colored {
+            display: inline-block;
+            font-weight: 700;
+            font-size: 28px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .title-colored span:nth-child(1) { color: var(--google-blue); }
+        .title-colored span:nth-child(2) { color: var(--google-red); }
+        .title-colored span:nth-child(3) { color: var(--google-yellow); }
+        .title-colored span:nth-child(4) { color: var(--google-blue); }
+        .title-colored span:nth-child(5) { color: var(--google-green); }
+        .title-colored span:nth-child(6) { color: var(--google-red); }
+
+        h2, h3 {
+            color: #333;
+            margin-bottom: 16px;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        input[type="file"] {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+            display: block;
+            width: 100%;
+            margin-bottom: 12px;
+        }
+
+        button {
+            background-color: var(--google-blue);
+            color: white;
+            padding: 10px 16px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #3367d6;
+        }
+
+        .message {
+            color: var(--google-green);
+            font-size: 14px;
+            margin-top: -10px;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        a {
+            margin-left: 8px;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        a.download {
+            color: var(--google-blue);
+        }
+
+        a.delete {
+            color: var(--google-red);
+        }
+
+        .logout {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .logout:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <div class="title-colored">
+            <span>C</span><span>h</span><span>a</span><span>t</span><span>G</span><span>PT</span>
+        </div>
+        <h2>👑 管理员后台</h2>
+
+        <form method="POST" enctype="multipart/form-data">
+            <input type="file" name="file" accept=".yaml,.yml" required>
+            <button type="submit">上传</button>
+        </form>
+
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <div class="message">{{ messages[0] }}</div>
+          {% endif %}
+        {% endwith %}
+
+        <h3>📁 当前上传文件：</h3>
+        <ul>
+            {% for file in files %}
+                <li>
+                    {{ file }}
+                    <a class="download" href="{{ url_for('download_file', filename=file) }}">[下载]</a>
+                    <a class="delete" href="{{ url_for('delete_file', filename=file) }}">[删除]</a>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <a class="logout" href="{{ url_for('logout') }}">退出登录</a>
+    </div>
+</body>
+</html>

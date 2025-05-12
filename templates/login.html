@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <title>ChatGPT学习</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        :root {
+            --google-blue: #4285f4;
+            --google-red: #ea4335;
+            --google-yellow: #fbbc05;
+            --google-green: #34a853;
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .login-container {
+            background-color: #fff;
+            padding: 40px 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 380px;
+            box-sizing: border-box;
+            border-top: 6px solid var(--google-blue);
+        }
+        h2 {
+            margin-top: 0;
+            font-weight: 500;
+            font-size: 24px;
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .title-colored {
+            display: inline-block;
+            font-weight: 700;
+            font-size: 28px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .title-colored span:nth-child(1) { color: var(--google-blue); }
+        .title-colored span:nth-child(2) { color: var(--google-red); }
+        .title-colored span:nth-child(3) { color: var(--google-yellow); }
+        .title-colored span:nth-child(4) { color: var(--google-blue); }
+        .title-colored span:nth-child(5) { color: var(--google-green); }
+        .title-colored span:nth-child(6) { color: var(--google-red); }
+
+        .message {
+            color: #d32f2f;
+            font-size: 14px;
+            text-align: center;
+            margin-bottom: 16px;
+        }
+        .input-wrapper {
+            position: relative;
+        }
+        input[type="password"],
+        input[type="text"] {
+            width: 100%;
+            padding: 12px 40px 12px 16px;
+            margin: 10px 0 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+        input:focus {
+            border-color: var(--google-blue);
+            outline: none;
+        }
+        .toggle-visibility {
+            position: absolute;
+            top: 50%;
+            right: 12px;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #888;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--google-blue);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #3367d6;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="title-colored">
+            <span>C</span><span>h</span><span>a</span><span>t</span><span>G</span><span>PT</span>
+        </div>
+        <h2>🔐 请输入密码</h2>
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <div class="message">{{ messages[0] }}</div>
+          {% endif %}
+        {% endwith %}
+        <form method="POST">
+            <div class="input-wrapper">
+                <input type="password" name="password" id="passwordInput" placeholder="输入密码" required>
+                <span class="material-icons toggle-visibility" onclick="togglePassword()">visibility_off</span>
+            </div>
+            <button type="submit">登录</button>
+        </form>
+    </div>
+
+    <script>
+        function togglePassword() {
+            const passwordInput = document.getElementById("passwordInput");
+            const icon = document.querySelector(".toggle-visibility");
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                icon.textContent = "visibility";
+            } else {
+                passwordInput.type = "password";
+                icon.textContent = "visibility_off";
+            }
+        }
+    </script>
+</body>
+</html>

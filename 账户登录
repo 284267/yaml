@@ -1,0 +1,16 @@
+
+管理员密码1304552700
+
+游客密码：112233445566
+
+
+ngrok 的身份认证
+ngrok config add-authtoken 2wZwzIu3QwCqTZRJRSR4197TlCR_TuijBHZ1yVCXtvrUgDrP
+
+ngrok 的物理机真实位置！C:\ngrok\ngrok.exe
+
+穿透
+C:\ngrok\ngrok.exe http 5000
+
+然后你会看到像这样的输出：
+Forwarding    https://xxx.ngrok.io -> http://localhost:5000

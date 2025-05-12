@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+
+# 虚拟环境
+venv/
+.venv/
+
+# IDE（PyCharm）
+.idea/
+*.iml
+
+# Windows & 系统缓存
+AppData/
+*.log
+*.db
+*.tmp
+*.bak
+*.swp
+Thumbs.db
+.DS_Store
+
+# 上传文件/输出结果
+uploads/
+*.zip
